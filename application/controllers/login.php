@@ -21,7 +21,7 @@ class login extends MY_Controller
         $this->load->library('session');
 
         // Load database
-        $this->load->model('login_model');
+        $this->load->model('Login_model');
     }
 
     public function index()
@@ -36,30 +36,25 @@ class login extends MY_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
-            if (isset($this->session->userdata['logged_in'])) {
-                $this->load->view('admin_page');
-            } else {
-                $data['main_content'] = 'modules/login';
-                $this->load->view('template', $data);            }
-        } else {
             $data = array(
                 'username' => $this->input->post('username'),
                 'password' => $this->input->post('password')
             );
 
-            $result = $this->login_model->login($data);
+            $result = $this->Login_model->login($data);
             if($result == TRUE){
                 $username = $this->input->post('username');
-                $result = $this->login_model->read_user_information($username);
-                if($result == FALSE){
+                $user_details = $this->Login_model->read_user_information($username);
+                if($result == FALSE){ //
                     $session_data = array(
-                        'username' => $result[0]->user_name,
-                        'email' => $result[0]->user_email,
+                        'username' => $user_details[0]->user_name,
+                        'email' => $user_details[0]->email,
                     );
 
                     //Add user data in session
-                    $this->session->set_userdata('logged_in' , $data);
-                    $this->load->view('admin_page');
+                    $this->session->set_userdata('logged_in' , $session_data);
+                    $data['main_content'] = "home/index";
+                    $this->load->view('template', $data);
                 } else {
                     $data = array(
                         'error_message' => 'Invalid Username or Password',

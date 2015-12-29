@@ -6,10 +6,17 @@
  * Date: 12/24/2015
  * Time: 10:58 PM
  */
-class signup extends MY_Controller
+class Signup extends MY_Controller
 {
 
     public $error_message;
+    public $signup_data = array(
+        'first_name' => '',
+        'last_name' => '',
+        'email' => '',
+        'username' => '',
+        'password' => ''
+    );
 
     function __construct()
     {
@@ -18,8 +25,16 @@ class signup extends MY_Controller
         $this->load->library('encrypt');
         $this->load->model('Signup_model');
         $this->load->library('form_validation');
+
+        /*
+         * collect data from all input fields
+         */
+
     }
 
+    /*
+     * Sets validation rules and displays signup view
+     */
     function index(){
 
         /*
@@ -59,6 +74,14 @@ class signup extends MY_Controller
     }
 
 
+    public function collect_all_fields(){
+        $this->signup_data['first_name'] = $this->input->post('first_name');
+        $this->signup_data['last_name'] = $this->input->post('last_name');
+        $this->signup_data['username'] = $this->input->post('username');
+        $this->signup_data['email'] = $this->input->post('email');
+        $this->signup_data['password'] = $this->input->post(md5('password'));
+    }
+
     /*
      * Validates data given in input fields in signup form
      * If errors found reloads signup form
@@ -68,21 +91,30 @@ class signup extends MY_Controller
      */
     function validate_form()
     {
+
+        $this->collect_all_fields();
+        echo $this->signup_data['first_name'];
+
         /*
          * if validation fails reload signup form
          */
-
-
         if ($this->form_validation->run() == TRUE) { // validation fails
             $this->error_message = "Inputs are validation not validated";
-
             $data['main_content'] = 'modules/signup';
             $this->load->view('template' , $data);
         } else {
-            $validation = $this->Signup_model->validate();
+            $validation = $this->Signup_model->validate($this->signup_data['username'] ,$this->signup_data['email']);
             if($validation){ // no duplicate input in the database matches (username and email are available)
-                //insert username, email and all other elemts to db
-                $inserted = $this->Signup_model->insert_into_db();
+                //insert username, email and all other elemnts to db
+                echo $this->signup_data['username'];
+                $inserted = $this->Signup_model->insert_into_db(
+                    $this->signup_data['first_name'],
+                    $this->signup_data['last_name'],
+                    $this->signup_data['email'],
+                    $this->signup_data['username'],
+                    $this->signup_data['password']
+                );
+
                 if($inserted) {
                     $data['main_content'] = 'snippet/form_success';
                     $this->load->view('template' , $data);

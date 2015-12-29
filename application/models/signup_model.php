@@ -7,32 +7,25 @@
  * Time: 7:28 PM
  */
 
-class signup_model extends CI_Model
+class Signup_model extends CI_Model
 {
 
-    public $signup_data = array();
     public $matched_data = array();
 
     function __construct()
     {
         parent::__construct();
-
+        $this->load->database();
     }
 
     /*
      * Check to see if input username and email are available
      */
-    public function validate(){
-        $this->collect_all_fields();
+    public function validate($username , $email){
+        $this->db->where('username', $username);
+        $this->db->where('email', $email);
 
-        $query = "SELSECT * FROM `doctors`";
-        $query .= "WHERE 'first_name' = ? AND
-                    'last_name' = ? AND
-                    `username` = ? AND
-                    'email' = ? AND
-                    'password' = ?";
-
-        $result = $this->db->query($query, $this->signup_data);
+        $result = $this->db->get('doctors');
 
 
         if($result->num_rows >= 1){
@@ -52,25 +45,24 @@ class signup_model extends CI_Model
                 $this->matched_data['email'] = $row['email'];
             }
         }
-        return;
     }
 
-    private function collect_all_fields(){
-        $this->signup_data['first_name'] = $this->input->post('first_name');
-        $this->signup_data['last_name'] = $this->input->post('last_name');
-        $this->signup_data['username'] = $this->input->post('username');
-        $this->signup_data['email'] = $this->input->post('email');
-        $this->signup_data['password'] = $this->input->post(md5('username'));
 
-    }
 
     /*
      * Inserts collected inputs form signup form to the database
      */
-    public function insert_into_db(){
-        if($this->db->insert('doctors',$this->signup_data)){ return true;
+    public function insert_into_db($first_name, $last_name, $email, $username, $password){
+        $insert_data = array(
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'username' => $username,
+            'password' => $password
+);
+        echo $insert_data['first_name'];
+        if($this->db->insert('doctors',$insert_data)){ return true;
         } else {return false;}
-
     }
 
 }
