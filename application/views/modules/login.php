@@ -18,11 +18,11 @@
                     <?php echo form_open('login/validate_login'); ?>
                         <div class="form-group">
                             <label for="username"><i class="icon-user"><b>User Name</b></i> </label>
-                            <input class="form-control" type="text" placeholder="username" name="Username" />
+                            <input class="form-control" type="text" placeholder="Username" name="username" />
                         </div>
                         <div class="form-group">
                             <label for="password"><i class="icon-password"><b>Password</b></i> </label>
-                            <input class="form-control" type="password" name="Password" placeholder="password" />
+                            <input class="form-control" type="password" name="password" placeholder="Password" />
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-blue pull-right">Login</button>

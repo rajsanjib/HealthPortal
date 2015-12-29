@@ -53,7 +53,7 @@ class Signup extends MY_Controller
             array(
                 'field'   => 'password',
                 'label'   => 'Password',
-                'rules'   => 'trim|required|min_length[8]|max_length[30]|md5'
+                'rules'   => 'trim|required|min_length[4]|max_length[30]|md5'
             ),
             array(
                 'field'   => 'passconf',
@@ -79,7 +79,7 @@ class Signup extends MY_Controller
         $this->signup_data['last_name'] = $this->input->post('last_name');
         $this->signup_data['username'] = $this->input->post('username');
         $this->signup_data['email'] = $this->input->post('email');
-        $this->signup_data['password'] = $this->input->post(md5('password'));
+        $this->signup_data['password'] = md5($this->input->post('password'));
     }
 
     /*
@@ -106,15 +106,7 @@ class Signup extends MY_Controller
             $validation = $this->Signup_model->validate($this->signup_data['username'] ,$this->signup_data['email']);
             if($validation){ // no duplicate input in the database matches (username and email are available)
                 //insert username, email and all other elemnts to db
-                echo $this->signup_data['username'];
-                $inserted = $this->Signup_model->insert_into_db(
-                    $this->signup_data['first_name'],
-                    $this->signup_data['last_name'],
-                    $this->signup_data['email'],
-                    $this->signup_data['username'],
-                    $this->signup_data['password']
-                );
-
+                $inserted = $this->Signup_model->insert_into_db($this->signup_data);
                 if($inserted) {
                     $data['main_content'] = 'snippet/form_success';
                     $this->load->view('template' , $data);

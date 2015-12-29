@@ -8,15 +8,22 @@
  */
 class Login_model extends CI_Model {
 
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+    }
+
     /*
      * Validate
      * @ null
      */
     public function login($data){
-        $this->db->where('username', $this->input->post('username'));
-        $this->db->where('password', $this->input->post('password'));
-        $query = $this->db->get('users');
-        if($query->num == 1){
+        echo $data['username'];
+        $this->db->where('username', $data['username']);
+        $this->db->where('password', $data['password']);
+        $query = $this->db->get('doctors');
+        if($query->num_rows() == 1){
             return true;
         } else {
             return false;

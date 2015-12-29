@@ -22,27 +22,27 @@
                     <?php echo form_open('signup/validate_form'); ?>
                         <div class="form-group">
                             <label for="first_name"><i class="icon-lock"></i> <b>First Name</b></label>
-                            <input class="form-control" id="first_name" type="text" placeholder="First Name" value="<?php echo set_value('first_name'); ?>">
+                            <input class="form-control" id="first_name" type="text" placeholder="First Name" name="first_name" value="<?php echo set_value('first_name'); ?>">
                         </div>
                         <div class="form-group">
                             <label for="last_name"><i class="icon-lock"></i> <b>Last Name</b></label>
-                            <input class="form-control" id="last_name" type="text" placeholder="Last Name" value="<?php echo set_value('last_name'); ?>">
+                            <input class="form-control" id="last_name" type="text" placeholder="Last Name" name="last_name" value="<?php echo set_value('last_name'); ?>">
                         </div>
                         <div class="form-group">
                             <label for="register-username"><i class="icon-user"></i> <b>User Name</b></label>
-                            <input class="form-control" id="register-username" type="text" placeholder="User Name" value="<?php echo set_value('username'); ?>">
+                            <input class="form-control" id="register-username" type="text" placeholder="User Name" name="username" value="<?php echo set_value('username'); ?>">
                         </div>
                         <div class="form-group">
                             <label for="register-email"><i class="icon-user"></i> <b>Email</b></label>
-                            <input class="form-control" id="register-email" type="text" placeholder="Email" value="<?php echo set_value('email'); ?>">
+                            <input class="form-control" id="register-email" type="text" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>">
                         </div>
                         <div class="form-group">
                             <label for="register-password"><i class="icon-lock"></i> <b>Password</b></label>
-                            <input class="form-control" id="register-password" type="password" placeholder="Password" value="<?php echo set_value('password'); ?>">
+                            <input class="form-control" id="register-password" type="password" placeholder="Password" name="password" value="<?php echo set_value('password'); ?>">
                         </div>
                         <div class="form-group">
                             <label for="register-password2"><i class="icon-lock"></i> <b>Re-enter Password</b></label>
-                            <input class="form-control" id="register-password2" type="password" placeholder="Re-enter Password" value="<?php echo set_value('passconf'); ?>">
+                            <input class="form-control" id="register-password2" type="password" placeholder="Re-enter Password" name="passconf" value="<?php echo set_value('passconf'); ?>">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn pull-right" name="register">Register</button>

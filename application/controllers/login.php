@@ -7,7 +7,6 @@
  * Time: 7:46 PM
  */
 
-session_start();  //we need to start session in order to access it through CI
 class login extends MY_Controller
 {
     public function __construct()
@@ -32,8 +31,23 @@ class login extends MY_Controller
 
     public function validate_login()
     {
+
+        $login_data = array(
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password')
+        );
+
+
+        $logged_in = $this->Login_model->login($login_data);
+        if($logged_in){
+        }else {
+
+            echo "Please try to login again";
+        }
+        /*
         $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+
 
         if ($this->form_validation->run() == FALSE) {
             $data = array(
@@ -63,7 +77,7 @@ class login extends MY_Controller
                     $this->load->view('template', $data);
                 }
             }
-        }
+        }*/
     }
 
     public function logout(){

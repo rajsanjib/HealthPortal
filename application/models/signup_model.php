@@ -52,16 +52,9 @@ class Signup_model extends CI_Model
     /*
      * Inserts collected inputs form signup form to the database
      */
-    public function insert_into_db($first_name, $last_name, $email, $username, $password){
-        $insert_data = array(
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'email' => $email,
-            'username' => $username,
-            'password' => $password
-);
-        echo $insert_data['first_name'];
-        if($this->db->insert('doctors',$insert_data)){ return true;
+    public function insert_into_db($signup_data){
+
+        if($this->db->insert('doctors',$signup_data)){ return true;
         } else {return false;}
     }
 
