@@ -14,6 +14,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
+
+                <p class="alert-danger"><?php echo $error_message; ?></p>
+
                 <div class="basic-login">
                     <?php echo form_open('login/validate_login'); ?>
                         <div class="form-group">

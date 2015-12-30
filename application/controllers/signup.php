@@ -79,7 +79,7 @@ class Signup extends MY_Controller
         $this->signup_data['last_name'] = $this->input->post('last_name');
         $this->signup_data['username'] = $this->input->post('username');
         $this->signup_data['email'] = $this->input->post('email');
-        $this->signup_data['password'] = md5($this->input->post('password'));
+        $this->signup_data['password'] = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
     }
 
     /*

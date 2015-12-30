@@ -19,15 +19,12 @@ class Login_model extends CI_Model {
      * @ null
      */
     public function login($data){
-        echo $data['username'];
+        $this->db->select('password');
         $this->db->where('username', $data['username']);
-        $this->db->where('password', $data['password']);
-        $query = $this->db->get('doctors');
-        if($query->num_rows() == 1){
-            return true;
-        } else {
-            return false;
-        }
+        $this->db->from('doctors');
+        $hash = $this->db->get()->row('password');
+
+        return $this->verify_password_hash($data['password'], $hash );
     }
 
     /*
@@ -49,4 +46,17 @@ class Login_model extends CI_Model {
         }
     }
 
+    /**
+     * verify_password_hash function.
+     *
+     * @access private
+     * @param mixed $password
+     * @param mixed $hash
+     * @return bool
+     */
+    private function verify_password_hash($password, $hash) {
+
+        return password_verify($password, $hash);
+
+    }
 }

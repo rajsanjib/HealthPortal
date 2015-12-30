@@ -9,6 +9,14 @@
 
 class login extends MY_Controller
 {
+
+    public $data = array(
+        'main_content' => '',
+        'error_message' => '',
+        'user_email' => '',
+        'user_name' => ''
+    );
+
     public function __construct()
     {
         parent::__construct();
@@ -21,64 +29,41 @@ class login extends MY_Controller
 
         // Load database
         $this->load->model('Login_model');
+
     }
 
     public function index()
     {
-        $data['main_content'] = 'modules/login';
-        $this->load->view('template', $data);
+        $this->load->view('includes/header', $this->data);
+        $this->load->view('modules/login' , $this->data);
+        $this->load->view('includes/footer', $this->data);
     }
 
     public function validate_login()
     {
 
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+
+
         $login_data = array(
             'username' => $this->input->post('username'),
-            'password' => $this->input->post('password')
+            'password' => password_hash($this->input->post('password'),PASSWORD_BCRYPT)
         );
 
 
         $logged_in = $this->Login_model->login($login_data);
         if($logged_in){
+            $data['user_details'] = $this->Login_model->read_user_information($login_data['username']);
+            $this->load->view('includes/header', $this->data);
+            $this->load->view('modules/dashboard' , $this->data);
+            $this->load->view('includes/footer', $this->data);
         }else {
-
-            echo "Please try to login again";
+            $this->data['error_message'] = "Username or password doesn't match. Please try to login again";
+            $this->index();
         }
-        /*
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
-
-        if ($this->form_validation->run() == FALSE) {
-            $data = array(
-                'username' => $this->input->post('username'),
-                'password' => $this->input->post('password')
-            );
-
-            $result = $this->Login_model->login($data);
-            if($result == TRUE){
-                $username = $this->input->post('username');
-                $user_details = $this->Login_model->read_user_information($username);
-                if($result == FALSE){ //
-                    $session_data = array(
-                        'username' => $user_details[0]->user_name,
-                        'email' => $user_details[0]->email,
-                    );
-
-                    //Add user data in session
-                    $this->session->set_userdata('logged_in' , $session_data);
-                    $data['main_content'] = "home/index";
-                    $this->load->view('template', $data);
-                } else {
-                    $data = array(
-                        'error_message' => 'Invalid Username or Password',
-                        'main_content' => 'modules/login',
-                    );
-                    $this->load->view('template', $data);
                 }
-            }
-        }*/
-    }
 
     public function logout(){
         // Removing session data
