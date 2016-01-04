@@ -6,7 +6,7 @@
  * Date: 12/31/2015
  * Time: 10:36 PM
  */
-class qna extends CI_Controller
+class questions extends CI_Controller
 {
     function __construct()
     {
