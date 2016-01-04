@@ -61,17 +61,22 @@ class Question_model extends CI_Model
      * returns questions
      * @param $filter
      * @param $direction
-     * @param $category
+     * @param $question_data
+     *
      */
-    public function get_questions($filter , $direction, $category){
+    public function get_questions($filter , $direction, $question_data){
 
         $this->db->select("question_id, title, content, category, date_posted");
+
+        $this->db->where('question_id', $question_id);
         $this->db->from('questions');
         $this->db->order_by($filter, $direction);
         $query = $this->db->get('questions');
 
         return $query->result_array();
     }
+
+
 
     /**
      * Post a question
@@ -95,5 +100,6 @@ class Question_model extends CI_Model
             return false;
         }
     }
+
 
 }
