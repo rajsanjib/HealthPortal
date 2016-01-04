@@ -45,8 +45,8 @@
 						<li><a href="#">About Us</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><?php echo anchor('views/modules/sign_up.php','<span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up'); ?></li>
-						<li><?php echo anchor('views/modules/login.php','<span class="glyphicon glyphicon-log-in"></span>&nbsp;Login'); ?></li>
+						<li><?php echo anchor('Signup/index','<span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up'); ?></li>
+						<li><?php echo anchor('login/index','<span class="glyphicon glyphicon-log-in"></span>&nbsp;Login'); ?></li>
 
 					</ul>
 				</div>

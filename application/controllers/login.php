@@ -56,13 +56,13 @@ class login extends MY_Controller
         if($logged_in){
             $data['user_details'] = $this->Login_model->read_user_information($login_data['username']);
             $this->load->view('includes/header', $this->data);
-            $this->load->view('modules/dashboard' , $this->data);
+            $this->load->view('doctor_dashboard/dashboard' , $this->data);
             $this->load->view('includes/footer', $this->data);
         }else {
-            $this->data['error_message'] = "Username or password doesn't match. Please try to login again";
-            $this->index();
+            /*$this->data['error_message'] = "Username or password doesn't match. Please try to login again";
+            $this->index();*/
+            $this-redirect('')
         }
-
                 }
 
     public function logout(){
