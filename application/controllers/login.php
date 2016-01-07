@@ -61,7 +61,7 @@ class login extends MY_Controller
         }else {
             /*$this->data['error_message'] = "Username or password doesn't match. Please try to login again";
             $this->index();*/
-            $this-redirect('')
+            $this-redirect('');
         }
                 }
 

@@ -1,0 +1,6 @@
+/*************************************
+GOOGLE CALENDAR API 
+*************************************/
+product name - Google Calendar API Quickstart
+google calendar api key - AIzaSyD8QPgnBqHVQ7LXW0bCXiHlt915U2ugIH4
+google client id - 10758109073-kn3kmfpuc5m652obedrbpilas9smbbqd.apps.googleusercontent.com

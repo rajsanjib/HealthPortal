@@ -10,6 +10,13 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
+		<!-- Including dependencies for FullCalendar api -->
+		 <link rel="'stylesheet" href="<?php echo base_url('api/calendar/fullcalendar/dist/fullcalendar.css'); ?>" >
+		<script src="<?php echo base_url('api/calendar/jquery/jquery.min.js'); ?>"></script>
+		<script src="<?php echo base_url('api/calendar/moment/min/moment.min.js'); ?>"></script>
+		<script src="<?php echo base_url('api/calendar/fullcalendar/fullcalendar.js'); ?>"></script>
+
+
         <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/bootstrap.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/icomoon-social.css'); ?>">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
@@ -43,6 +50,7 @@
 						<li><a href="#">Events</a></li>
 						<li><a href="#">Forums</a></li>
 						<li><a href="#">About Us</a></li>
+						<li><?php echo anchor('appointments/index', 'Appointment'); ?></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><?php echo anchor('Signup/index','<span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up'); ?></li>
