@@ -42,14 +42,14 @@ CREATE TABLE IF NOT EXISTS `schedule_map` (
 -- Table structure for table `bookings`
 --
 
-CREATE TABLE IF NOT EXISTS `bookings` (
+CREATE TABLE IF NOT EXISTS `appointments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `doctors_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
   `appointment_schedule_id` int(11) NOT NULL,
-  `patients_id` int(11) NOT NULL,
-  `diseases_description` text NOT NULL,
-  `datetime_start` datetime NOT NULL,
-  `datetime_end` datetime NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `time_start` datetime NOT NULL,
+  `time_end` datetime NOT NULL,
   `status_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `doctors` (
   `qualification` varchar(50) NOT NULL,
   `rating` int(11) NOT NULL,
   `is_schedule_set` BOOL NOT NULL ,
+  'picture_path' VARCHAR(100) DEFAULT NULL ,
   PRIMARY KEY (`id`),
   KEY `specialization_id` (`specialization_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

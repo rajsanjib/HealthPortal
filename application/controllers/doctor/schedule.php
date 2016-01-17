@@ -6,7 +6,7 @@
  * Date: 1/7/2016
  * Time: 12:17 PM
  */
-class schedule extends MY_Controller
+class Schedule extends MY_Controller
 {
     private $doc_id;
 
@@ -112,37 +112,12 @@ class schedule extends MY_Controller
     }
 
     /**
-     * Loads the schedule view for editing
-     * 1. get doctor id
-     * 2. get doctor name
-     * 3. get schedule for $doc_id for each $day
-     * 4. load schedule view
+     * Loads the schedule view for viewing
      */
-    public function index(){
+    public function view_schedule(){
 
-        // Get doc id
-        $doc_id = $this->model->doctor_model->get_doctor_id();
-
-        //get doc name
-        $doc_name = $this->model->doctor_model->get_doctor_name();
-
-        for($day=1; $day<=7 ; $day++ ) {
-            $this->populate_data($doc_id,$day);
-        }
-
-        $this->schedule_array = array(
-        'sunday' => $this->sunday,
-        'monday' =>$this->monday,
-        'tuesday' => $this->tuesday,
-        'wednesday' => $this->wednesday,
-        'thursday' => $this->thursday,
-        'friday' => $this->friday,
-        'saturday' => $this->saturday,
-        'doc_name' => $doc_name,
-    );
-
-        $this->load->view('doctor_dashboard/schedule_view', $this->schedule_array);
-
+        $doctor_id = $this->model->doctor_model->get_doctor_id();
+        $this->load->view('doctor_dashboard/schedule_view', $this->prepare_schedule($doctor_id));
     }
 
     /**
@@ -251,4 +226,37 @@ class schedule extends MY_Controller
         );
         return $day;
     }
+
+    /**
+     * Prepares schedule
+     * Called by appointment_doctor_profile controller also
+     * @param $doctor_id
+     * @return array
+     *
+     */
+    public function prepare_schedule($doctor_id)
+    {
+
+        //get doc name
+        $doc_name = $this->model->doctor_model->get_doctor_name();
+
+        for ($day = 1; $day <= 7; $day++) {
+            $this->populate_data($doctor_id, $day);
+        }
+
+        $this->schedule_array = array(
+            'sunday' => $this->sunday,
+            'monday' => $this->monday,
+            'tuesday' => $this->tuesday,
+            'wednesday' => $this->wednesday,
+            'thursday' => $this->thursday,
+            'friday' => $this->friday,
+            'saturday' => $this->saturday,
+            'doc_name' => $doc_name,
+        );
+
+        return $this->schedule_array;
+    }
+
+
 }

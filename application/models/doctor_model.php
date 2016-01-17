@@ -27,4 +27,16 @@ class doctor_model extends CI_Model
         return $query->result_array();
     }
 
+    function search_doctors($search_array){
+
+        if($search_array['name']){$this->db->like('name', $search_array['name']);}
+        if($search_array['location']){$this->db->like('location',$search_array['location']);}
+        if($search_array['qualification']){$this->db->like('qualification',$search_array['qualification']);}
+        if($search_array['rating']){$this->db->where('rating',$search_array['rating']);}
+
+        $results = $this->db->get('doctors');
+
+        return $results;
+    }
+
 }

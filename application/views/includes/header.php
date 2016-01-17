@@ -37,6 +37,7 @@
         
 
         <!-- Navigation & Logo-->
+		<div class="section">
 		<nav class="navbar navbar-default navbar-fixed-top" style="border-radius:0;margin-bottom:0; border-bottom: solid 3px teal; letter-spacing:1px;" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -45,7 +46,7 @@
 				<div>
 					<ul class="nav navbar-nav">
 						<li class="active" ><a href="#"><span class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-search">&nbsp;</span>Search</a></li>
+						<li><?php echo anchor('Search/index','<span class="glyphicon glyphicon-search">&nbsp;</span>Search'); ?></li>
 						<li><a href="#">Articles</a></li>
 						<li><a href="#">Events</a></li>
 						<li><a href="#">Forums</a></li>
@@ -60,4 +61,5 @@
 				</div>
 			</div>
 		</nav>
+			</div>
 	<!-- End of Navigation & Logo -->
