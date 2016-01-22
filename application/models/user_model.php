@@ -3,10 +3,10 @@
 /**
  * Created by PhpStorm.
  * User: Sanjib
- * Date: 1/2/2016
- * Time: 8:26 AM
+ * Date: 1/17/2016
+ * Time: 8:31 PM
  */
-class Appointment_model
+class User_model
 {
 
 }

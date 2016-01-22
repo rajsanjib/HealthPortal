@@ -98,7 +98,7 @@ class Schedule extends MY_Controller
         'saturday' => '',
     );
 
-    function __construct()
+    public function __construct()
     {
 
         parent::__construct();
