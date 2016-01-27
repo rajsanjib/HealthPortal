@@ -39,4 +39,13 @@ class doctor_model extends CI_Model
         return $results;
     }
 
+    public function get_doctor_name($doctor_id){
+
+        $this->db->select('name');
+        $this->db->where('id',$doctor_id);
+        $query = $this->db->get('doctors');
+
+        return $query->result();
+    }
+
 }

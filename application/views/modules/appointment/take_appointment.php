@@ -1,118 +1,197 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3 clearfix">
-            <img src="<?php echo base_url('images/left_arrow.png'); ?>" />
-            <p><?php echo date(); ?></p>
-            <img src="<?php echo base_url('images/right_arrow.png'); ?>" />
+            <button id="appointment_date" name="<?php echo now(); ?>"><?php echo date(DATE_RFC822,time()); ?></button>
         </div>
         <div class="col-lg-8">
-            <table class="tab-content">
-                <thead>Day</thead>
-                <thead>Morning Shift</thead>
-                <thead>Afternoon Shift</thead>
-                <thead>Evening Shift</thead>
-                <tr>
-                    <td>Sunday</td>
-                    <td><a class="popup"> <?php echo $sunday['morning_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $sunday['afternoon_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $sunday['evening_shift']; ?> </a></td>
-                </tr>
-                <tr>
-                    <td>Monday</td>
-                    <td><a class="popup"> <?php echo $monday['morning_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $monday['afternoon_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $monday['evening_shift']; ?> </a></td>
-                </tr>
-                <tr>
-                    <td>Tuesday</td>
-                    <td><a class="popup"> <?php echo $tuesday['morning_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $tuesday['afternoon_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $tuesday['evening_shift']; ?> </a></td>
-                </tr>
-                <tr>
-                    <td>Wednesday</td>
-                    <td><a class="popup"> <?php echo $wednesday['morning_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $wednesday['afternoon_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $wednesday['evening_shift']; ?> </a></td>
-                </tr>
-                <tr>
-                    <td>Thursday</td>
-                    <td><a class="popup"> <?php echo $thursday['morning_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $thursday['afternoon_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $thursday['evening_shift']; ?> </a></td>
-                </tr>
-                <tr>
-                    <td>Friday</td>
-                    <td><a class="popup"> <?php echo $friday['morning_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $friday['afternoon_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $friday['evening_shift']; ?> </a></td>
-                </tr>
-                <tr>
-                    <td>Saturday</td>
-                    <td><a class="popup"> <?php echo $saturday['morning_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $saturday['afternoon_shift']; ?> </a></td>
-                    <td><a class="popup"> <?php echo $saturday['evening_shift']; ?> </a></td>
+            <table class="table-bordered table-responsive">
+                <thead>Appointment</thead>
+                <th>Day</th>
+                <th>Morning</th>
+                <th>Afternoon</th>
+                <th>Evening</th>
+
+
+                <tr id="sunday">
+                    <td class="day">Sunday</td>
+                    <td class="time"><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"> <?php echo $sunday['morning_shift_start']; ?></p> -
+                            <p class="shift_end"> <?php echo $sunday['morning_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $sunday['afternoon_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $sunday['afternoon_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $sunday['evening_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $sunday['evening_shift_end']; ?></p>
+                        </a></td>
                 </tr>
 
+                <tr id="monday">
+                    <td class="day">Monday</td>
+                    <td class="time"><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"> <?php echo $monday['morning_shift_start']; ?></p> -
+                            <p class="shift_end"> <?php echo $monday['morning_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $monday['afternoon_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $monday['afternoon_shift_end']; ?></p>
+                        </a></td>
+                    <td><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $monday['evening_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $monday['evening_shift_end']; ?></p>
+                        </a></td>
+                </tr>
+                <tr id="tuesday">
+                    <td class="day">Tuesday</td>
+                    <td class="time"><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"> <?php echo $tuesday['morning_shift_start']; ?></p> -
+                            <p class="shift_end"> <?php echo $tuesday['morning_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $tuesday['afternoon_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $tuesday['afternoon_shift_end']; ?></p>
+                        </a></td>
+                    <td><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $tuesday['evening_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $tuesday['evening_shift_end']; ?></p>
+                        </a></td>
+                </tr>
+                <tr id="wednesday">
+                    <td class="day">Wednesday</td>
+                    <td class="time"><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"> <?php echo $wednesday['morning_shift_start']; ?></p> -
+                            <p class="shift_end"> <?php echo $wednesday['morning_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $wednesday['afternoon_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $wednesday['afternoon_shift_end']; ?></p>
+                        </a></td>
+                    <td><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $wednesday['evening_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $wednesday['evening_shift_end']; ?></p>
+                        </a></td>
+                </tr>
+                <tr id="thursday">
+                    <td class="day">Thursday</td>
+                    <td class="time"><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"> <?php echo $thursday['morning_shift_start']; ?></p> -
+                            <p class="shift_end"> <?php echo $thursday['morning_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $thursday['afternoon_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $thursday['afternoon_shift_end']; ?></p>
+                        </a></td>
+                    <td><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $thursday['evening_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $thursday['evening_shift_end']; ?></p>
+                        </a></td>
+                </tr>
+                <tr id="friday">
+                    <td class="day">Friday</td>
+                    <td class="time"><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"> <?php echo $friday['morning_shift_start']; ?></p> -
+                            <p class="shift_end"> <?php echo $friday['morning_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $friday['afternoon_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $friday['afternoon_shift_end']; ?></p>
+                        </a></td>
+                    <td><a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $friday['evening_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $friday['evening_shift_end']; ?></p>
+                        </a></td>
+                </tr>
+                <tr id="saturday">
+                    <td class="day">Saturday</td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"> <?php echo $saturday['morning_shift_start']; ?></p> -
+                            <p class="shift_end"> <?php echo $saturday['morning_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $saturday['afternoon_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $saturday['afternoon_shift_end']; ?></p>
+                        </a></td>
+                    <td class="time"> <a href="#" class="btn" data-model-id="popup">
+                            <p class="shift_start"><?php echo $saturday['evening_shift_start']; ?></p> -
+                            <p class="shift_end"><?php echo $saturday['evening_shift_end']; ?></p>
+                        </a></td>
+                </tr>
 
             </table>
         </div>
 
     </div>
 
-    <div id="popup" class="modal-box">
-        <header> <a href="#" class="js-modal-close close">×</a>
-            <h3>Pop Up </h3>
-        </header>
-        <div class="modal-body">
-            <form method="get" action="<?php echo base_url('appointment/make_appointment');?> "
-            <div class="form-group">
-                <label for="Name">Patient's name</label>
-                <input type="text" name="patient_name" placeholder="Patient's Name" />
-            </div>
-            <div class="form-group">
-                <label for="description">Disease Discription</label>
-                <textarea name="description" placeholder="Enter your diseases description here..." />
-            </div>
-
-        </div>
-        <footer> <a href="#" class="btn btn-small js-modal-close">Close</a> </footer>
+    <div class="popup" class="modal-box" data-popup="popup">
+        <section class="popup-inner">
+            <header>
+                <h3>Take Appointment </h3>
+            </header>
+                <?php echo form_open('appointment/Appointment/make_appointment'); ?>
+                    <div class="form-group">
+                        <label for="time">Date</label>
+                        <input type="text"  value="" id="appointment_date" name="appointment_date">
+                    </div>
+                    <div class="form-group">
+                        <label for="time">On</label>
+                        <input type="text"  value="" name="day" class="day">
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Time</label>
+                        <input type="text"  value="" name="time_start"> to <input type="text" value="" name="time_end">
+                    </div>
+                    <div class="form-group">
+                    <label for="Name">Patient's name</label>
+                    <input type="text" name="patient_name" placeholder="Patient's Name" />
+                </div>
+                <div class="form-group">
+                    <label for="description">Disease Description</label>
+                    <textarea name="description" placeholder="Enter your diseases description here..." ></textarea>
+                </div>
+                    <div class="form-group">
+                        <button type="submit" class="bth btn-blue" id="submit">Submit</button>
+                    </div>
+            <?php form_close(); ?>
+                <footer> <a href="#" class="btn" data-popup-close="popup">Close</a>
+                    </footer>
+                <a href="#" class="popup-close" data-popup-close="popup">x</a>
+        </section>
     </div>
 
     <script>
-        $(function(){
 
-            var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+        $(function() {
+            //----- OPEN
+            $('[data-model-id]').on('click', function(e)  {
 
-            $('a[data-modal-id]').click(function(e) {
+                var time_start = $(this).children('p.shift_start').text();
+                var time_end = $(this).children('p.shift_end').text();
+
+                var day = $(this).parents('.time').siblings('.day').text();
+                var date = $('#appointment_date').text();
+
+                $("input.day").attr('value',day);
+                $("input#appointment_date").attr('value',date);
+                $("input[name='time_start']").attr('value',time_start);
+                $("input[name='time_end']").attr('value',time_end);
+
+                var targeted_popup_class = jQuery(this).attr('data-model-id');
+                $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
                 e.preventDefault();
-                $("body").append(appendthis);
-                $(".modal-overlay").fadeTo(500, 0.7);
-                //$(".js-modalbox").fadeIn(500);
-                var modalBox = $(this).attr('data-modal-id');
-                $('#'+modalBox).fadeIn($(this).data());
             });
 
+            //----- CLOSE
+            $('[data-popup-close]').on('click', function(e)  {
+                var targeted_popup_class = jQuery(this).attr('data-popup-close');
+                $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 
-            $(".js-modal-close, .modal-overlay").click(function() {
-                $(".modal-box, .modal-overlay").fadeOut(500, function() {
-                    $(".modal-overlay").remove();
-                });
-
+                e.preventDefault();
             });
-
-            $(window).resize(function() {
-                $(".modal-box").css({
-                    top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
-                    left: ($(window).width() - $(".modal-box").outerWidth()) / 2
-                });
-            });
-
-            $(window).resize();
 
         });
     </script>
-
-
 
 </div>

@@ -1,17 +1,17 @@
 <div class="wrapper">
     <div class="container">
         <table class="table-bordered">
-            <thead class="grey">Day</thead>
-            <thead>Morning Shift</thead>
-            <thead>Afternoon Shift</thead>
-            <thead>Evening Shift</thead>
+            <th class="grey">Day</th>
+            <th>Morning Shift</th>
+            <th>Afternoon Shift</th>
+            <th>Evening Shift</th>
 
-            <?php $i = 0; ?>
+            <?php $i = 1; ?>
             <?php form_open('schedule/update_schedule'); ?>
             <?php foreach($schedule_array as $schedule): ?>
             <tr>
                 <td>
-                    <?php echo $schedule['day']; ?>
+                    <?php echo day_to_string($schedule['day']); ?>
                 </td>
                 <td>
                     <div class="form-group">
@@ -29,8 +29,12 @@
                     </div>
                 </td>
             </tr>
-            <?php $i++;?>
+            <?php if($i <= 7) $i++;?>
             <?php endforeach; ?>
         </table>
+        <div class="form-group">
+            <button type="submit" class="btn-green pull-right">Update</button>
+        </div>
+        <?php form_close(); ?>
     </div>
 </div>

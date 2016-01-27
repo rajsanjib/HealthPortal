@@ -54,10 +54,8 @@ class login extends MY_Controller
 
         $logged_in = $this->Login_model->login($login_data);
         if($logged_in){
-            $data['user_details'] = $this->Login_model->read_user_information($login_data['username']);
-            $this->load->view('includes/header', $this->data);
-            $this->load->view('doctor_dashboard/dashboard' , $this->data);
-            $this->load->view('includes/footer', $this->data);
+            $_SESSION['username'] = $login_data['username'];
+            header(base_url('doctor_dashboard/index'));
         }else {
             /*$this->data['error_message'] = "Username or password doesn't match. Please try to login again";
             $this->index();*/

@@ -10,25 +10,20 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-		<!-- Including dependencies for FullCalendar api -->
-		 <link rel="'stylesheet" href="<?php echo base_url('api/calendar/fullcalendar/dist/fullcalendar.css'); ?>" >
-		<script src="<?php echo base_url('api/calendar/jquery/jquery.min.js'); ?>"></script>
-		<script src="<?php echo base_url('api/calendar/moment/min/moment.min.js'); ?>"></script>
-		<script src="<?php echo base_url('api/calendar/fullcalendar/fullcalendar.js'); ?>"></script>
 
-
-        <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/bootstrap.min.css'); ?>">
-        <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/icomoon-social.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('packages/bootstrap/css/bootstrap.min.css'); ?>">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="<?php echo base_url('bootstrap/css/leaflet.css'); ?>" />
-		<!--[if lte IE 8]>
-		    <link rel="stylesheet" href="<?php echo base_url(bootstrap/css/leaflet.ie.css); ?> "/>
-		<![endif]-->
-		<link rel="stylesheet" href=" <?php echo base_url('bootstrap/css/main-red.css'); ?>">
-		<link rel="stylesheet" href=" <?php echo base_url('bootstrap/css/sidebar.css'); ?>">
 
-        <script src=" <?php echo base_url('bootstrap/js/modernizr-2.6.2-respond-1.1.0.min.js'); ?>"></script>
+		<!--[if lte IE 8]>
+
+		<![endif]-->
+		<link rel="stylesheet" href=" <?php echo base_url('packages/bootstrap/css/main-red.css'); ?>">
+		<link rel="stylesheet" href=" <?php echo base_url('packages/bootstrap/css/sidebar.css'); ?>">
+		<link rel="stylesheet" href=" <?php echo base_url('packages/bootstrap/css/popup.css'); ?>">
+
+		<script language="javascript" type="text/javascript" src="<?php echo base_url('packages/jquery/jquery.min.js'); ?>"></script>
+
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -45,13 +40,14 @@
 				</div>
 				<div>
 					<ul class="nav navbar-nav">
-						<li class="active" ><a href="#"><span class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
+						<li class="active" ><?php echo anchor(base_url(),'&nbsp;Home');?></li>
 						<li><?php echo anchor('Search/index','<span class="glyphicon glyphicon-search">&nbsp;</span>Search'); ?></li>
 						<li><a href="#">Articles</a></li>
 						<li><a href="#">Events</a></li>
 						<li><a href="#">Forums</a></li>
 						<li><a href="#">About Us</a></li>
-						<li><?php echo anchor('appointments/index', 'Appointment'); ?></li>
+						<li><?php echo anchor('appointment/Appointment/appointment_doctor_profile/1', 'Appointment'); ?></li>
+						<li><?php echo anchor('Doctor_Dashboard/home','Dashboard'); ?></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><?php echo anchor('Signup/index','<span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up'); ?></li>

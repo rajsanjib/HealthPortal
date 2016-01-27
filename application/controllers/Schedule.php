@@ -4,89 +4,19 @@
  * Created by PhpStorm.
  * User: Sanjib
  * Date: 1/7/2016
- * Time: 12:17 PM
+ * time: 12:17 PM
  */
 class Schedule extends MY_Controller
 {
     private $doc_id;
 
-    public $sunday = array(
-        'morning_shift_start' => '',
-        'morning_shift_end' => '',
-        'morning_tokens' => '',
-        'afternoon_shift_start' => '',
-        'afternoon_shift_end' => '',
-        'afternoon_tokens' => '',
-        'evening_shift_start' => '',
-        'evening_shift_end' => '',
-        'evening_tokens' => '',
-    );
-    public $monday = array(
-        'morning_shift_start' => '',
-        'morning_shift_end' => '',
-        'morning_tokens' => '',
-        'afternoon_shift_start' => '',
-        'afternoon_shift_end' => '',
-        'afternoon_tokens' => '',
-        'evening_shift_start' => '',
-        'evening_shift_end' => '',
-        'evening_tokens' => '',
-    );
-    public $tuesday = array(
-        'morning_shift_start' => '',
-        'morning_shift_end' => '',
-        'morning_tokens' => '',
-        'afternoon_shift_start' => '',
-        'afternoon_shift_end' => '',
-        'afternoon_tokens' => '',
-        'evening_shift_start' => '',
-        'evening_shift_end' => '',
-        'evening_tokens' => '',
-    );
-    public $wednesday = array(
-        'morning_shift_start' => '',
-        'morning_shift_end' => '',
-        'morning_tokens' => '',
-        'afternoon_shift_start' => '',
-        'afternoon_shift_end' => '',
-        'afternoon_tokens' => '',
-        'evening_shift_start' => '',
-        'evening_shift_end' => '',
-        'evening_tokens' => '',
-    );
-    public $thursday = array(
-        'morning_shift_start' => '',
-        'morning_shift_end' => '',
-        'morning_tokens' => '',
-        'afternoon_shift_start' => '',
-        'afternoon_shift_end' => '',
-        'afternoon_tokens' => '',
-        'evening_shift_start' => '',
-        'evening_shift_end' => '',
-        'evening_tokens' => '',
-    );
-    public $friday = array(
-        'morning_shift_start' => '',
-        'morning_shift_end' => '',
-        'morning_tokens' => '',
-        'afternoon_shift_start' => '',
-        'afternoon_shift_end' => '',
-        'afternoon_tokens' => '',
-        'evening_shift_start' => '',
-        'evening_shift_end' => '',
-        'evening_tokens' => '',
-    );
-    public $saturday = array(
-        'morning_shift_start' => '',
-        'morning_shift_end' => '',
-        'morning_tokens' => '',
-        'afternoon_shift_start' => '',
-        'afternoon_shift_end' => '',
-        'afternoon_tokens' => '',
-        'evening_shift_start' => '',
-        'evening_shift_end' => '',
-        'evening_tokens' => '',
-    );
+    public $sunday = array();
+    public $monday = array();
+    public $tuesday = array();
+    public $wednesday = array();
+    public $thursday = array();
+    public $friday = array();
+    public $saturday = array();
 
     public $schedule_array = array(
         'sunday' => '',
@@ -108,7 +38,7 @@ class Schedule extends MY_Controller
          *  schedule_model
          */
         $this->load->model('doctor_model');
-        $this->load->model('schedule_model');
+        $this->load->model('Schedule_model');
     }
 
     /**
@@ -123,16 +53,17 @@ class Schedule extends MY_Controller
     /**
      * Edit schedule
      * Opens edit schedule view($schedule_array)
+     * @param $doctor_id
      *
      */
-    public function edit_schedule(){
-        $this->load->view('doctor_dashboard/edit_schedule',$this->schedule_array);
+    public function edit_schedule($doctor_id){
+
 
     }
 
     /**
      * Updates the schedule in database
-     * If its first time the schedule is being edited, calls insert_schedule method
+     * If its first shift the schedule is being edited, calls insert_schedule method
      */
     public function update_schedule(){
 
@@ -150,7 +81,7 @@ class Schedule extends MY_Controller
             $schedule['evening_tokens'] = $this->input->post('evening_tokens' . $i);
             $schedule['day'] = $i;
 
-            // Check to see if schedule is being set for first time
+            // Check to see if schedule is being set for first shift
             // If true call insert else call update
             if($this->model->schedule_model->is_schedule_set()) {
                 // Schedule already set
@@ -171,39 +102,39 @@ class Schedule extends MY_Controller
 
     /**
      * Populates member variables with schedule data
-     * @param $doc_id
+     * @param $doctor_id
      * @param $day (in integers sunday = 1, monday = 2 ...)
      */
-    public function populate_data($doc_id, $day){
+    public function populate_data($doctor_id, $day){
 
         // Schedule for a particular day for logged in doctor is returned
-        $query = $this->model->schedule_model->get_schedule($doc_id, $day);
+        $result = $this->Schedule_model->get_schedule($doctor_id, $day);
 
-        switch($day) {
-            case 1:
-                $this->sunday = $this->init_day($query);
-                break;
-            case 2:
-                $this->monday = $this->init_day($query);
-                break;
-            case 3:
-                $this->tuesday = $this->init_day($query);
-                break;
-            case 4:
-                $this->wednesday = $this->init_day($query);
-                break;
-            case 5:
-                $this->thursday = $this->init_day($query);
-                break;
-            case 6:
-                $this->friday = $this->init_day($query);
-                break;
-            case 7:
-                $this->saturday = $this->init_day($query);
-                break;
-            default:
+        foreach($result->result() as $query)
+            switch ($day) {
+                case 1:
+                    $this->sunday = $this->init_day($query);
+                    break;
+                case 2:
+                    $this->monday = $this->init_day($query);
+                    break;
+                case 3:
+                    $this->tuesday = $this->init_day($query);
+                    break;
+                case 4:
+                    $this->wednesday = $this->init_day($query);
+                    break;
+                case 5:
+                    $this->thursday = $this->init_day($query);
+                    break;
+                case 6:
+                    $this->friday = $this->init_day($query);
+                    break;
+                case 7:
+                    $this->saturday = $this->init_day($query);
+                    break;
+                default:
             }
-
     }
 
     /**
@@ -213,16 +144,14 @@ class Schedule extends MY_Controller
      */
     public function init_day($query)
     {
+
         $day = array(
-            'morning_shift_start' => $query->result_row()->morning_shift_start,
-            'morning_shift_end' => $query->result_row()->morning_shift_end,
-            'morning_tokens' => $query->result_row()->morning_tokens,
-            'afternoon_shift_start' => $query->result_row()->afternoon_shift_start,
-            'afternoon_shift_end' => $query->result_row()->afternoon_shift_end,
-            'afternoon_tokens' => $query->result_row()->afternoon_tokens,
-            'evening_shift_start' => $query->result_row()->evening_shift_start,
-            'evening_shift_end' => $query->result_row()->evening_shift_end,
-            'evening_tokens' => $query->result_row()->evening_tokens
+            'morning_shift_start' => $query->morning_shift_start,
+            'morning_shift_end' => $query->morning_shift_end,
+            'afternoon_shift_start' => $query->afternoon_shift_start,
+            'afternoon_shift_end' => $query->afternoon_shift_end,
+            'evening_shift_start' => $query->evening_shift_start,
+            'evening_shift_end' => $query->evening_shift_end,
         );
         return $day;
     }
@@ -238,11 +167,13 @@ class Schedule extends MY_Controller
     {
 
         //get doc name
-        $doc_name = $this->model->doctor_model->get_doctor_name();
+        $doc_name = $this->doctor_model->get_doctor_name($doctor_id);
 
-        for ($day = 1; $day <= 7; $day++) {
+
+        for($day = 1; $day <= 7; $day++) {
             $this->populate_data($doctor_id, $day);
         }
+
 
         $this->schedule_array = array(
             'sunday' => $this->sunday,
