@@ -90,20 +90,37 @@ CREATE TABLE IF NOT EXISTS `doctors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login_id` INT(11) NOT NULL ,
   `name` varchar(50) NOT NULL,
-  `specialization` VARCHAR(100) NOT NULL,
+  `specialities` VARCHAR(100) NOT NULL,
   `clinic_name` varchar(50) NOT NULL,
+  `hospital` VARCHAR(50) NOT NULL ,
   `address` varchar(1000) NOT NULL,
+  `contact_number` VARCHAR(13) DEFAULT NULL ,
   `qualification` varchar(50) NOT NULL,
-  `rating` int(11) NOT NULL,
+  `rating` int(1) NOT NULL,
   `is_schedule_set` BOOL NOT NULL ,
-  'picture_path' VARCHAR(100) DEFAULT NULL ,
+  'profile_picture' VARCHAR(100) DEFAULT NULL ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-INSERT INTO doctors (name,username,password,specialization,clinic_name,address,qualification) VALUES ("sanjib","asanjib","sanjib","neurology","Sanjib's Clinic","28 kilo Dhulikhel","MD");
+INSERT INTO doctors (name,login_id,specialities,clinic_name,address,qualification) VALUES ("sanjib",1,"neurology","Sanjib's Clinic","28 kilo Dhulikhel","MD");
 
 -- --------------------------------------------------------
+DROP TABLE IF EXISTS `hospitals`;
+CREATE TABLE `hospitals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login_id` INT(11) NOT NULL ,
+  `name` VARCHAR(30) NOT NULL ,
+  `specialities` VARCHAR(100),
+  `address` VARCHAR(60),
+  `contact_number` VARCHAR(14),
+  `ambulance_number` VARCHAR(14),
+  `opening_hours` VARCHAR(20),
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+ALTER TABLE hospitals ADD CONSTRAINT `hospital_login` FOREIGN KEY (`login_id`) REFERENCES `login`(`id`) ON DELETE CASCADE ON UPDATE CASCADE ;
+
+INSERT INTO hospitals (login_id, name, specialities, address, contact_number, ambulance_number, opening_hours) VALUE (2, "KU Hospital", "General", "Dhulikhel", "01485784","011234573", "24-hours" );
 
 
 --

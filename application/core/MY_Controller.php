@@ -11,6 +11,8 @@ class MY_Controller extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->helper('date');
         $this->load->helper('string');
+        $this->load->helper('functions');
+
 
         // Load language file
         $this->lang->load('en_admin', 'english');

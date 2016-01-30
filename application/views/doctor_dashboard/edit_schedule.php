@@ -1,5 +1,6 @@
 <div class="wrapper">
     <div class="container">
+        <?php form_open('Doctor_Dashboard/update_schedule'); ?>
         <table class="table-bordered">
             <th class="grey">Day</th>
             <th>Morning Shift</th>
@@ -7,7 +8,6 @@
             <th>Evening Shift</th>
 
             <?php $i = 1; ?>
-            <?php form_open('schedule/update_schedule'); ?>
             <?php foreach($schedule_array as $schedule): ?>
             <tr>
                 <td>
@@ -31,10 +31,10 @@
             </tr>
             <?php if($i <= 7) $i++;?>
             <?php endforeach; ?>
-        </table>
-        <div class="form-group">
-            <button type="submit" class="btn-green pull-right">Update</button>
-        </div>
+            <div class="form-group">
+                <?php echo form_submit('submit','Update'); ?>
+            </div>
+            </table>
         <?php form_close(); ?>
     </div>
 </div>

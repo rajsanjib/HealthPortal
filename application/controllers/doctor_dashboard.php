@@ -16,7 +16,6 @@ class Doctor_Dashboard extends MY_Controller
     {
         parent::__construct();
 
-        $this->load->helper('functions');
 
         // Models
         $this->load->model('Doctor_model');
