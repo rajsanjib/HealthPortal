@@ -15,26 +15,23 @@
     <div class="container">
 
 
-        <div class="panel alert-danger"><?php echo validation_errors(); echo $this->error_message; ?></div>
+        <div class="panel alert-danger"><?php echo validation_errors(); ?></div>
          <div class="row">
             <div class="col-sm-5">
                 <div class="basic-login">
                     <?php echo form_open('signup/validate_form'); ?>
+
                         <div class="form-group">
-                            <label for="first_name"><i class="icon-lock"></i> <b>First Name</b></label>
-                            <input class="form-control" id="first_name" type="text" placeholder="First Name" name="first_name" value="<?php echo set_value('first_name'); ?>">
+                            <label for="account">Account Type</label>
+                            <select name="account" class="form-control">
+                                <option>Select One...</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Patient">Patient</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="last_name"><i class="icon-lock"></i> <b>Last Name</b></label>
-                            <input class="form-control" id="last_name" type="text" placeholder="Last Name" name="last_name" value="<?php echo set_value('last_name'); ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="register-username"><i class="icon-user"></i> <b>User Name</b></label>
-                            <input class="form-control" id="register-username" type="text" placeholder="User Name" name="username" value="<?php echo set_value('username'); ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="register-email"><i class="icon-user"></i> <b>Email</b></label>
-                            <input class="form-control" id="register-email" type="text" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>">
+                            <label for="register-email"><i class="icon-user"></i> <b>Username</b></label>
+                            <input class="form-control" id="register-username" type="text" placeholder="Username or email" name="username" value="<?php echo set_value('username'); ?>">
                         </div>
                         <div class="form-group">
                             <label for="register-password"><i class="icon-lock"></i> <b>Password</b></label>

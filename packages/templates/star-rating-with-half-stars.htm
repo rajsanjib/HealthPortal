@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="http://snipplicious.com/css/bootstrap-3.1.1.min.css">
+
+<link rel="stylesheet" type="text/css" href="http://snipplicious.com/css/font-awesome-4.0.3.min.css">
+
+<script src="http://snipplicious.com/js/jquery.js"></script>
+<script src="http://snipplicious.com/js/bootstrap.min.js"></script>
+<script>$(document).ready(function () {
+    $('.star-rating i').hover(function () {
+        $(this).prevAll().removeClass('fa-star-o fa-star-half-full').addClass('fa-star');
+        $(this).removeClass('fa-star-o fa-star-half-full').addClass('fa-star');
+        $(this).nextAll().addClass('fa-star-o').removeClass('fa-star fa-star-half-full');
+    }, function () {
+        //
+    });
+
+    $('.star-rating').hover(function () {
+        //
+    }, function () {
+        $(this).children('i').each(function () {
+            $(this).removeClass('fa-star-o fa-star-half-full')
+            $(this).attr('class', $(this).attr('data-prev-rating-class'));
+        });
+    });
+});</script>
+</head>
+<body><script type="text/javascript">ANCHORFREE_VERSION="623161526"</script><script type='text/javascript'>(function(){if(typeof(_AF2$runned)!='undefined'&&_AF2$runned==true){return}_AF2$runned=true;_AF2$ = {'SN':'HSSHIELD00NP','IP':'205.164.32.194','CH':'HSSCNL000701','CT':'z99','HST':'','AFH':'hss509','RN':Math.floor(Math.random()*999),'TOP':(parent.location!=document.location||top.location!=document.location)?0:1,'AFVER':'4.15.2','fbw':false,'FBWCNT':0,'FBWCNTNAME':'FBWCNT_CHROME','NOFBWNAME':'NO_FBW_CHROME','B':'c','VER': 'nonus'};if(_AF2$.TOP==1){document.write("<scr"+"ipt src='http://box.anchorfree.net/insert/insert.php?sn="+_AF2$.SN+"&ch="+_AF2$.CH+"&v="+ANCHORFREE_VERSION+6+"&b="+_AF2$.B+"&ver="+_AF2$.VER+"&afver="+_AF2$.AFVER+"' type='text/javascript'></scr"+"ipt>");}})();</script>
+<div class="container" style="margin-top:30px">
+    <h3 class="text-center">You can display half stars<br><small>while mouse-over working with whole stars as expected!</small></h3>
+    <p class="text-center">
+        <a class="btn btn-danger btn-xs star-rating" data-rating="4.33">
+            <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+            <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+            <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+            <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+            <i class="fa fa-star-half-full" data-prev-rating-class="fa fa-star-half-full"></i>
+        </a>
+    </p>
+    <h4 class="text-center">Mouse over to see the function</h4>
+    <p class="text-center">
+        <a class="btn btn-primary btn-xs star-rating" data-rating="2.33">
+            <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+            <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+            <i class="fa fa-star-half-full" data-prev-rating-class="fa fa-star-half-full"></i>
+            <i class="fa fa-star-o" data-prev-rating-class="fa fa-star-o"></i>
+            <i class="fa fa-star-o" data-prev-rating-class="fa fa-star-o"></i>
+        </a>
+    </p>
+    <p class="text-center">Notice the data-rating attribute as well as prev-rating-star attributes.</p>
+    <p class="text-center">This snippet allows you to show star rating with half-star precision preserving the expceted whole-star mouse effect!</p>
+</div>
+</body>
+</html>

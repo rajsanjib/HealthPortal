@@ -9,15 +9,6 @@
 class Signup extends MY_Controller
 {
 
-    public $error_message;
-    public $signup_data = array(
-        'first_name' => '',
-        'last_name' => '',
-        'email' => '',
-        'username' => '',
-        'password' => ''
-    );
-
     function __construct()
     {
         parent::__construct();
@@ -59,11 +50,6 @@ class Signup extends MY_Controller
                 'field'   => 'passconf',
                 'label'   => 'Password Confirmation',
                 'rules'   => 'required|matches[password]|trim'
-            ),
-            array(
-                'field'   => 'email',
-                'label'   => 'Email',
-                'rules'   => 'trim|required|valid_email|is_unique[users.email]'
             )
         );
 
@@ -74,13 +60,6 @@ class Signup extends MY_Controller
     }
 
 
-    public function collect_all_fields(){
-        $this->signup_data['first_name'] = $this->input->post('first_name');
-        $this->signup_data['last_name'] = $this->input->post('last_name');
-        $this->signup_data['username'] = $this->input->post('username');
-        $this->signup_data['email'] = $this->input->post('email');
-        $this->signup_data['password'] = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
-    }
 
     /*
      * Validates data given in input fields in signup form
@@ -91,36 +70,28 @@ class Signup extends MY_Controller
      */
     function validate_form()
     {
-
-        $this->collect_all_fields();
-        echo $this->signup_data['first_name'];
+        $signup_data['username'] = $this->input->post('username');
+        $signup_data['password'] = md5($this->input->post('password'));
+        $signup_data['account'] = $this->input->post('account');
 
         /*
          * if validation fails reload signup form
          */
         if ($this->form_validation->run() == TRUE) { // validation fails
-            $this->error_message = "Inputs are validation not validated";
-            $data['main_content'] = 'modules/signup';
-            $this->load->view('template' , $data);
+            echo "Inputs are validation not validated";
+            echo "inputs could not be validated";
         } else {
-            $validation = $this->Signup_model->validate($this->signup_data['username'] ,$this->signup_data['email']);
-            if($validation){ // no duplicate input in the database matches (username and email are available)
-                //insert username, email and all other elemnts to db
-                $inserted = $this->Signup_model->insert_into_db($this->signup_data);
+            if(!($this->Signup_model->check_for_duplicate($signup_data['username']))){
+                $inserted = $this->Signup_model->insert_into_db($signup_data);
+                echo "data sent for insertion";
                 if($inserted) {
-                    $data['main_content'] = 'snippet/form_success';
-                    $this->load->view('template' , $data);
+                    echo "You have successfully created account";
                 } else {
-                    $this->error_message .= "Unable to insert into database";
+                    echo "not inserted";
                 }
-            } else { //database validation failure ie fields already contain in the database
-                $this->error_message .= "Sorry following are already taken";
-                foreach($validation as $message){$this->error_message .= $message;}
+            } else {
+                echo "database validation failure ie fields already contain in the database";
             }
-
-
         }
-
     }
-
 }

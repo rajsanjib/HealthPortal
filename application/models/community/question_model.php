@@ -64,11 +64,9 @@ class Question_model extends CI_Model
      * @param $question_data
      *
      */
-    public function get_questions($filter , $direction, $question_id){
+    public function get_questions($filter = NULL , $direction = NULL){
 
         $this->db->select("question_id, title, content, category, date_posted");
-
-        $this->db->where('question_id', $question_id);
         $this->db->from('questions');
         $this->db->order_by($filter, $direction);
         $query = $this->db->get('questions');
@@ -93,13 +91,11 @@ class Question_model extends CI_Model
             'date_posted' => $question_data['date_posted']
         );
 
-
         if ($this->db->insert('questions',$qs_data) ) {
             return $this->db->insert_id();
         } else {
             return false;
         }
     }
-
 
 }

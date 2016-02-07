@@ -29,9 +29,9 @@ class Appointment extends Schedule
     public function appointment_doctor_profile($doctor_id){
 
         $this->doctor_id = $doctor_id;
-        $schedule_array = $this->prepare_schedule($doctor_id);
+        $page_data['schedule_array'] = $this->prepare_schedule($doctor_id);
         $this->load->view('includes/header');
-        $this->load->view('modules/appointment/take_appointment',$schedule_array);
+        $this->load->view('modules/appointment/take_appointment',$page_data);
     }
 
     /**

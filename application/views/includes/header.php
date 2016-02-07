@@ -42,9 +42,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active" ><?php echo anchor(base_url(),'&nbsp;Home');?></li>
 						<li><?php echo anchor('Search/index','<span class="glyphicon glyphicon-search">&nbsp;</span>Search'); ?></li>
-						<li><a href="#">Articles</a></li>
-						<li><a href="#">Events</a></li>
-						<li><a href="#">Forums</a></li>
+						<li><?php echo anchor('community/Questions/index','Community'); ?></li>
 						<li><a href="#">About Us</a></li>
 						<li><?php echo anchor('appointment/Appointment/appointment_doctor_profile/1', 'Appointment'); ?></li>
 						<li><?php echo anchor('Doctor_Dashboard/home','Dashboard'); ?></li>

@@ -173,6 +173,46 @@ ALTER TABLE 'schedule'
     ADD CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE ;
 
 
+DROP TABLE IF EXISTS `ci_sessions`;
+CREATE TABLE `ci_sessions` (
+  `session_id` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT `0`,
+  `ip_address` varchar(16) COLLATE utf8_bin NOT NULL DEFAULT `0`,
+  `user_agent` varchar(120) COLLATE utf8_bin DEFAULT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT `0`,
+  `user_data` text COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `qs_id` int(11) NOT NULL,
+  `cm_body` text NOT NULL,
+  `votes` INT(4) DEFAULT `0`,
+  `cm_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usr_id` int(11) NOT NULL,
+  `cm_is_active` int(1) NOT NULL DEFAULT '1', --1 = active
+  PRIMARY KEY (`cm_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE comments ADD CONSTRAINT `question_id` FOREIGN KEY (`qs_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE comments ADD CONSTRAINT `user_id` FOREIGN KEY (`usr_id`) REFERENCES `login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE `questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usr_id` int(11) NOT NULL,
+  `qs_title` varchar(255) NOT NULL,
+  `qs_body` text NOT NULL,
+  `qs_label` TEXT DEFAULT NUll,
+  `votes` INT(4) DEFAULT `0`,
+  `qs_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `qs_is_active` int(1) NOT NULL,
+  PRIMARY KEY (`qs_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+ALTER TABLE questions ADD CONSTRAINT `user_id` FOREIGN KEY (`usr_id`) REFERENCES `login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 
 ----------------------------------------
 -- Dummy Data

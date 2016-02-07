@@ -20,19 +20,15 @@ class Signup_model extends CI_Model
 
     /*
      * Check to see if input username and email are available
+     * Return true if duplicate found
      */
-    public function validate($username , $email){
+    public function check_for_duplicate($username){
         $this->db->where('username', $username);
-        $this->db->where('email', $email);
-
-        $result = $this->db->get('doctors');
-
-
-        if($result->num_rows >= 1){
-            $this->collect_matched_fields($result); // matched username or email found
-            return $this->matched_data;
+        $result = $this->db->get('login');
+        if($result->num_rows() >= 1){
+            return true;
         } else {
-            return $this->signup_data; // return signup data to be re-shown in the form
+            return false;
         }
     }
 
@@ -54,7 +50,7 @@ class Signup_model extends CI_Model
      */
     public function insert_into_db($signup_data){
 
-        if($this->db->insert('doctors',$signup_data)){ return true;
+        if($this->db->insert('login',$signup_data)){ return true;
         } else {return false;}
     }
 

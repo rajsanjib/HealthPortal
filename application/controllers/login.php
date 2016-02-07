@@ -48,20 +48,49 @@ class login extends MY_Controller
 
         $login_data = array(
             'username' => $this->input->post('username'),
-            'password' => password_hash($this->input->post('password'),PASSWORD_BCRYPT)
+            'password' => md5($this->input->post('password'))
         );
 
 
-        $logged_in = $this->Login_model->login($login_data);
-        if($logged_in){
-            $_SESSION['username'] = $login_data['username'];
-            header(base_url('doctor_dashboard/index'));
+        $result = $this->Login_model->login($login_data);
+        if($result){
+            echo "result returned true";
+            foreach($result->result() as $row){
+                $login_id = $row->id;
+                $username = $row->username;
+                $account = $row->account;
+            }
+            echo "username is " . $username;
+            echo "account type is ". $account;
+            $this->set_session($username, $account, $login_id);
+            $this->redirect_to();
         }else {
-            /*$this->data['error_message'] = "Username or password doesn't match. Please try to login again";
-            $this->index();*/
-            $this-redirect('');
+            echo "Username or password doesn't match. Please try to login again";
+
         }
-                }
+    }
+
+    public function set_session($username, $account, $login_id){
+        $array = array(
+            'login_id' => $login_id,
+            'username' => $username,
+            'account' => $account
+        );
+        $this->session->set_userdata($array);
+    }
+
+    public function redirect_to(){
+        if($_SESSION['account'] == 'Doctor'){
+            redirect('doctor_dashboard/index');
+        }
+        if($_SESSION['account'] == "Patient"){
+            header(base_url('user_dashboard/index'));
+        }
+        else if($_SESSION['account'] == "hospital"){
+            header(base_url("hospital_dashboard"));
+        }
+    }
+
 
     public function logout(){
         // Removing session data

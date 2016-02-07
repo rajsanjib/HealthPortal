@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 /**
  * Created by PhpStorm.
  * User: Sanjib
@@ -15,40 +17,33 @@ class Doctor_Dashboard extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-
-
         // Models
         $this->load->model('Doctor_model');
         $this->load->model('Schedule_model');
         $this->load->model('User_model');
         $this->load->model('Appointment_model');
 
-        session_start();
-
         // Initialize static variables
         //Doctor_Dashboard::$date = $this->date();
-        Doctor_Dashboard::$doctor_id = 1;
     }
 
-    public function index($page){
-        /*
-        if (!($this->auth_doctor(Doctor_Dashboard::$doctor_id))) {
-            $this->header(base_url());
-        }*/
+    public function index(){
 
-        if(!isset($_SESSION['username'])){
-            header(base_url());
+        if(!isset($_SESSION['login_id'])){
+            redirect(base_url());
         }
-
+        Doctor_Dashboard::$doctor_id = $_SESSION['login_id'];
+        echo Doctor_Dashboard::$doctor_id;
         $this->home();
     }
 
     public function home(){
+
         $this->load->view('includes/header');
         $this->load->view('doctor_dashboard/sidebar');;
         $this->load->view('doctor_dashboard/welcome');
         $this->load->view('includes/footer');
-
+        echo Doctor_Dashboard::$doctor_id = $_SESSION['login_id'];
     }
 
     public function appointments($message = NULL){

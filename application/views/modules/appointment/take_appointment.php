@@ -11,7 +11,7 @@
                 <th>Afternoon</th>
                 <th>Evening</th>
 
-
+z
                 <tr id="sunday">
                     <td class="day">Sunday</td>
                     <td class="time"><a href="#" class="btn" data-model-id="popup">
